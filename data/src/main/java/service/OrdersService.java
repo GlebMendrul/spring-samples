@@ -19,7 +19,8 @@ public class OrdersService {
         this.start = 0;
     }
 
-    public List<Order> getFirstResult() {
+    public List<Order> getFirstResult(Integer resultPerPage) {
+        this.resultPerPage = resultPerPage;
         return ordersDAO.getOrders(start, resultPerPage);
     }
 
@@ -39,14 +40,6 @@ public class OrdersService {
 
     public void setOrdersDAO(OrdersDAO ordersDAO) {
         this.ordersDAO = ordersDAO;
-    }
-
-    public void setResultPerPage(Integer resultPerPage) {
-        this.resultPerPage = resultPerPage;
-    }
-
-    public Integer getResultPerPage() {
-        return resultPerPage;
     }
 
     public Integer getStart() {

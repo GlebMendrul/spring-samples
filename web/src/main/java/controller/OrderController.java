@@ -2,6 +2,7 @@ package controller;
 
 import domain.Order;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,10 +22,13 @@ public class OrderController {
     @Autowired
     private OrdersService ordersService;
 
+    @Value("${resultPerPage}")
+    private Integer resultPerPage;
+
     @RequestMapping("/orders")
     @ResponseBody
     public List<Order> getOrders() {
-        return ordersService.getFirstResult();
+        return ordersService.getFirstResult(resultPerPage);
     }
 
     @RequestMapping("/next")
@@ -42,7 +46,7 @@ public class OrderController {
     @RequestMapping("/resultPerPage")
     @ResponseBody
     public Integer getResultPerPage() {
-        return ordersService.getResultPerPage();
+        return resultPerPage;
     }
 
     @RequestMapping("/firstIndex")
